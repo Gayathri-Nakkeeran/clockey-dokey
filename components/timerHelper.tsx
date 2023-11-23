@@ -4,10 +4,7 @@ type propsey = {
   timeZone: string;
 };
 export const updateClockTime = (props: propsey) => {
-  console.log("props", props.timeZone);
-  let timezone;
   if (props.clockSpanRef?.current instanceof HTMLElement) {
-    // timezone = props.clockSpanRef.current.dataset.timezone;
     let time = new Date().toLocaleTimeString("en-US", {
       hour: "2-digit",
       minute: "2-digit",
@@ -16,4 +13,12 @@ export const updateClockTime = (props: propsey) => {
     });
     props.clockSpanRef.current.textContent = time;
   }
+};
+
+export const getUserData = async (id: string) => {
+  console.log("id from server", id);
+  const userData = await fetch(
+    `https://jsonplaceholder.typicode.com/users/${id}`
+  );
+  return userData.json();
 };
